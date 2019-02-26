@@ -1,0 +1,32 @@
+{
+  "name": "magasindeproducteurs",
+  "version": "0.1.0",
+  "description": "Magasins de producteurs",
+  "main": "dist/bundle.js",
+  "dependencies": {
+    "lodash": "^4.17.11",
+    "query-string": "^6.2.0",
+    "vue": "^2.6.6",
+    "vue-analytics": "^5.16.2",
+    "vue-router": "^3.0.2",
+    "vuex": "^3.1.0"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.29",
+    "systematic": "^3.0.2",
+    "vue-template-compiler": "^2.6.6",
+    "vue-webpack-gettext": "^0.3.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "engines": {
+    "npm": ">=6",
+    "node": ">=11"
+  },
+  "files": [
+    "dist",
+    "README.rst"
+  ]
+}
