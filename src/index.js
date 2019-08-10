@@ -1,4 +1,10 @@
-/* global MDP_API_URL, MdpApi */
+/* global MDP_API_URL */
+
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'open-iconic/font/css/open-iconic-bootstrap.css'
+
+import 'awesomplete/awesomplete.css'
 
 import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
@@ -8,7 +14,6 @@ import 'src/styles.scss'
 import rootPage from './pages/root.vue'
 import router from './routes'
 import { client } from './services/mdp'
-import store from 'src/store'
 
 function configure () {
   if (MDP_API_URL) {
@@ -28,18 +33,10 @@ function configure () {
 }
 
 async function bootstrapApplication () {
-  MdpApi.getUser().then((user) => {
-    store.commit('setUser', user)
-  }, () => {
-    console.log('User is not authenticated.')
-  })
-
-  console.log("blah")
 
   new Vue( // eslint-disable-line no-new
     Object.assign({
       el: '#content',
-      store,
       router,
     }, rootPage)
   )

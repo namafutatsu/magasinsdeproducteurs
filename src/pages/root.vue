@@ -1,65 +1,49 @@
 <template lang="pug">
-div
-  #header
-    .content
-      .row
-        .col.logo
-          a(href="/")
-            img(
-              id="top_logo"
-              src="~/src/assets/images/logo.png"
-              alt="Magasin de Producteurs"
-              title="Magasin de Producteurs"
-            )
-        .col.mentions
-          a(href='#')
-            img(
-              alt='Histoires de Producteurs',
-              title='Histoires de Producteurs',
-              src='~/src/assets/images/footer_catalog.png'
-            )
-            | Histoires de Producteurs
-          a(href='#')
-            img(
-              alt='Si vous êtes un Magasin de Producteurs',
-              title='Si vous êtes un Magasin de Producteurs',
-              src='~src/assets/images/home.png'
-            )
-            | Si vous êtes un Magasin de Producteurs
-          a(href='#')
-            img(
-              alt='Se Connecter',
-              title='Se Connecter',
-              src='~src/assets/images/logon.png'
-            )
-            | Se connecter
-          a(href='#')
-            img(
-              alt="S'inscrire",
-              title="S'inscrire",
-              src='~src/assets/images/subscribe.png'
-            )
-            | S'inscrire
-
+.full-height
+  #header.header-footer
+    .logo
+      a(href="/")
+        img(
+          id="top_logo"
+          src="~/src/assets/images/logo-small.png"
+          alt="Magasin de Producteurs"
+          title="Magasin de Producteurs"
+        )
+    input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
+    #spacer
+    button#switch-btn.btn.btn-lg.btn-outline-light(type="button") 
+      span.oi.oi-grid-three-up(title='menu' aria-hidden='true')
   router-view
-  #footer
+  #footer.header-footer
 </template>
 
 <script>
-/* global Vue */
+/* global MdpApi */
 
-import router from 'src/routes'
+import Awesomplete from 'awesomplete'
 
 export default {
-  data: function () {
-    return {}
-  },
-  methods: {
-  },
-  computed: {
-  },
-  components: {
-  },
+  async mounted () {
+    const names = await MdpApi.getShopNames()
+    let input = document.getElementById('search')
+    const shopNameList = names.map((s) => {
+      return {
+        label: s.name,
+        value: s.slug,
+      }
+    })
+    new Awesomplete(input, {
+      minChars: 0,
+      list: shopNameList,
+      replace: function(suggestion) {
+        this.input.value = ''
+      },
+    })
+    input.addEventListener('awesomplete-select', (e) => {
+      console.log(">>>>>>>>> ", e.text)
+      this.$router.push({ name: 'detail', params: { slug: e.text.value } })
+    })
+  }
 }
 </script>
 
@@ -69,12 +53,25 @@ export default {
 #top_logo {
   margin: 6px;
   float: left;
+  display: inline;
 }
 
-#header {
-  color: white;
-  position: relative;
-  min-height: 100px;
+#search {
+  margin: 6px;
+  cursor: pointer;
+}
+
+#switch-btn {
+  margin: 6px;
+  cursor: pointer;
+}
+
+.header-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
   background-color: $deep-purple;
   margin-bottom: 0px;
 
@@ -82,27 +79,15 @@ export default {
     color: white;
     text-decoration: none;
   }
-
-  .mentions a {
-    margin-left: 12px;
-    img {
-      margin-right: 6px;
-    }
-  }
 }
 
-@media (max-width: 1024px) {
-  .logo { width: 100%; }
-  .mentions { width: 100%; }
+#header {
 }
 
-@media (min-width: 1024px) {
-  .logo { width: 30%; }
-  .mentions {
-    width: 70%;
-    position: absolute;
-    right: 0px;
-    bottom: 0px;
-  }
+#footer {
+}
+
+#spacer {
+  width: 12px;
 }
 </style>

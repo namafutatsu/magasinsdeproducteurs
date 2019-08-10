@@ -25,3 +25,15 @@ export function basicXhr (url, method = 'GET', data = null, headers = {}) {
     xhr.send(data)
   })
 }
+
+export function getMapIcon () {
+  return {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 4,
+    fillOpacity: 0.8,
+    strokeOpacity: 0.7,
+    strokeColor: '#801E6E',
+    fillColor: '#801E6E',
+    strokeWeight: 1,
+  }
+}

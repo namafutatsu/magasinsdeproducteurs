@@ -11,11 +11,16 @@
 
 html, body {
   width: 100%;
+  height: 100%;
   font-family: Verdana, Arial, Sans-Serif;
   font-size: 12px;
   padding: 0;
   margin: 0;
   color: $dark-grey;
+}
+
+#main-app {
+  height: 100%;
 }
 
 /* Dead Simple Grid by Vladimir Agafonkin */
@@ -47,4 +52,13 @@ html, body {
 
 @media (min-width: 1024px) {
   .content { width: 980px; }
+}
+
+.full-height {
+  height: 100%;
+}
+
+::placeholder {
+  color: peachpuff;
+  font-size: 13px;
 }
