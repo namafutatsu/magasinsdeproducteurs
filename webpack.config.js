@@ -11,4 +11,8 @@ webpackDefaults.plugins.push(
   })
 )
 
+webpackDefaults.module.rules.push(
+  { test: /\.otf(\?v=[0-9]\.[0-9]\.[0-9])?$/, use: 'url-loader?limit=50000' },
+)
+
 module.exports = webpackDefaults

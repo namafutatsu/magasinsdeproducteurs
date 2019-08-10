@@ -1,46 +1,17 @@
 <template lang="pug">
-div
+div.full-height
   #header
-    .content
-      .row
-        .col.logo
-          a(href="/")
-            img(
-              id="top_logo"
-              src="~/src/assets/images/logo.png"
-              alt="Magasin de Producteurs"
-              title="Magasin de Producteurs"
-            )
-        .col.mentions
-          a(href='#')
-            img(
-              alt='Histoires de Producteurs',
-              title='Histoires de Producteurs',
-              src='~/src/assets/images/footer_catalog.png'
-            )
-            | Histoires de Producteurs
-          a(href='#')
-            img(
-              alt='Si vous êtes un Magasin de Producteurs',
-              title='Si vous êtes un Magasin de Producteurs',
-              src='~src/assets/images/home.png'
-            )
-            | Si vous êtes un Magasin de Producteurs
-          a(href='#')
-            img(
-              alt='Se Connecter',
-              title='Se Connecter',
-              src='~src/assets/images/logon.png'
-            )
-            | Se connecter
-          a(href='#')
-            img(
-              alt="S'inscrire",
-              title="S'inscrire",
-              src='~src/assets/images/subscribe.png'
-            )
-            | S'inscrire
-
+    .logo
+      a(href="/")
+        img(
+          id="top_logo"
+          src="~/src/assets/images/logo-small.png"
+          alt="Magasin de Producteurs"
+          title="Magasin de Producteurs"
+        )
+    input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
+    button#switch-btn.btn.btn-lg.btn-outline-light(type="button") 
+      span.oi.oi-list(title='list' aria-hidden='true')
   router-view
   #footer
 </template>
@@ -69,12 +40,27 @@ export default {
 #top_logo {
   margin: 6px;
   float: left;
+  display: inline;
+}
+
+#search {
+  margin: 6px;
+  cursor: pointer;
+}
+
+#switch-btn {
+  margin: 6px;
+  cursor: pointer;
 }
 
 #header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   color: white;
   position: relative;
-  min-height: 100px;
+  min-height: 52px;
   background-color: $deep-purple;
   margin-bottom: 0px;
 

@@ -4,7 +4,11 @@
   "description": "Magasins de producteurs",
   "main": "dist/bundle.js",
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "jquery": "^3.2.1",
     "lodash": "^4.17.11",
+    "open-iconic": "^1.1.1",
+    "popper.js": "^1.15.0",
     "query-string": "^6.2.0",
     "vue": "^2.6.6",
     "vue-analytics": "^5.16.2",

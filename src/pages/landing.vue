@@ -1,25 +1,6 @@
 <template lang="pug">
-div
-  #region-map
-  #disclaimer
-    .content
-      .row
-        .col.laius
-          span.olivier "
-          span Nous éprouvons un réel plaisir à manger et boire des aliments qui ont du goût, une histoire...
-          p Et ce plaisir est encore plus grand lorsque ces produits nous sont vendus par ceux qui les ont faits.
-          p.olivier C'est pourquoi ON AIME les magasins de producteurs."
-        .col.images
-          img(
-            alt='vache',
-            title='vache',
-            src='~src/assets/images/carottes.png'
-          )
-          img(
-            alt='carottes',
-            title='carottes',
-            src='~src/assets/images/vache_accueil.png'
-          )
+.full-height
+  #map(ref="googleMap")
 </template>
 
 <script>
@@ -28,17 +9,58 @@ div
 export default {
   data: function () {
     return {
+      shops: [],
     }
   },
-  computed: {
-  },
-  methods: {
+  async mounted () {
+    this.shops = await MdpApi.getShops()
+    await GoogleLoad
+    const map = new google.maps.Map(this.$refs.googleMap, {
+      center: {
+        lat: 46.7, 
+        lng: 1.7,
+      },
+      zoom: 5,
+      gestureHandling: 'greedy',
+      disableDefaultUI: true,
+    })
+    this.shops.forEach((shop) => {
+      const coords = {
+        lat: shop.latitude,
+        lng: shop.longitude,
+      }
+      const marker = new google.maps.Marker({ // eslint-disable-line no-new
+        position: coords,
+        map: map,
+        title: shop.name,
+        icon: {
+          path: google.maps.SymbolPath.CIRCLE,
+          scale: 4,
+          fillOpacity: 0.8,
+          strokeOpacity: 0.7,
+          strokeColor: '#801E6E',
+          fillColor: '#801E6E',
+          strokeWeight: 1,
+        },
+      })
+      const infoWindow = new google.maps.InfoWindow({
+        content: shop.name,
+      })
+      google.maps.event.addListener(marker, 'click', () => {
+        infoWindow.open(map, marker)
+      })
+    })
   },
 }
 </script>
 
 <style scoped lang="scss">
 @import "src/variables";
+
+#map {
+  width: 100%;
+  height: 100%;
+}
 
 #region-map {
   height: 380px;
