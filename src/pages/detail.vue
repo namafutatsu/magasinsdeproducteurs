@@ -1,5 +1,5 @@
 <template lang="pug">
-#main
+#main.content
   div(v-if="shop")
     .shop-header
       h2 {{ shop.name }}
@@ -56,6 +56,7 @@ export default {
       google.maps.event.addListener(map, 'click', () => {
         this.shop = null
       })
+      // URL = http://maps.google.com/maps?q=24.197611,120.780512
       new google.maps.Marker({ // eslint-disable-line no-new
         position: this.shop.coords,
         map: map,
@@ -103,11 +104,12 @@ export default {
   }
 
   #oil-banner {
+    position: fixed;
+    bottom: 0;
     display: flex;
     align-items: center;
     height: 140px;
     background-color: #f8f2e8;
-    margin: 0 -1rem;
     padding: 1rem;
 
     img {

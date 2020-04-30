@@ -1,4 +1,4 @@
 include node_modules/systematic/mk/main.mk
 
-deploy: clean dist
+deploy:
 	rsync -avz --delete -e ssh dist/ myserver:projects/mdp.laflaque.fr/dist/

@@ -5,15 +5,23 @@
     v-if="shop"
     :to="{ name: 'detail', params: { slug: shop.slug }}"
   )
-    div
-      h3 {{ shop.name }}
-      p
-        b {{ shop.full_address }}
-    .arrow-right
+    .content.horiz-flex
+      div
+        h3 {{ shop.name }}
+        p
+          b {{ shop.full_address }}
+      .arrow-right
 </template>
 
 <script>
-/* global MdpApi, GoogleLoad, Vue */
+/* global google, navigator, MdpApi, GoogleLoad */
+import { getMapIcon } from 'src/services/utils'
+
+function getCurrentPosition (options = {}) {
+  return new Promise((resolve, reject) => {
+    navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  })
+}
 
 export default {
   data: function () {
@@ -23,21 +31,46 @@ export default {
     }
   },
   async mounted () {
-    this.shops = await MdpApi.getShops()
-    await GoogleLoad
+
+    const [, shops] = await Promise.all([
+      GoogleLoad,
+      MdpApi.getShops(),
+    ])
+
     const map = new google.maps.Map(this.$refs.googleMap, {
       center: {
-        lat: 44.7, 
+        lat: 46.2,
         lng: 2.7,
       },
-      zoom: 5,
+      zoom: 6,
       gestureHandling: 'greedy',
       disableDefaultUI: true,
     })
+
     google.maps.event.addListener(map, 'click', () => {
       this.shop = null
     })
-    this.shops.forEach((shop) => {
+
+    getCurrentPosition().then((posData) => {
+      const coords = {
+        lat: posData.coords.latitude,
+        lng: posData.coords.longitude,
+      }
+      map.setOptions({
+        center: coords,
+        zoom: 9,
+        title: 'Ma position',
+      })
+      new google.maps.Marker({ // eslint-disable-line no-new
+        position: coords,
+        map: map,
+      })
+      console.log('got coordinates', coords)
+    }, (err) => {
+      console.warn('could not acquire position', err)
+    })
+
+    shops.forEach((shop) => {
       shop.full_address = `${shop.address}, ${shop.zipcode} ${shop.city}`
       const coords = {
         lat: shop.latitude,
@@ -47,20 +80,14 @@ export default {
         position: coords,
         map: map,
         title: shop.name,
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 4,
-          fillOpacity: 0.8,
-          strokeOpacity: 0.7,
-          strokeColor: '#801E6E',
-          fillColor: '#801E6E',
-          strokeWeight: 1,
-        },
+        icon: getMapIcon(),
       })
       google.maps.event.addListener(marker, 'click', () => {
         this.shop = shop
       })
     })
+
+    this.shops = shops
   },
 }
 </script>
@@ -81,12 +108,14 @@ export default {
   cursor: pointer;
 
   width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0px;
   background-color: white;
   border-top: solid 1px #aaa;
-  padding: 1rem;
-  padding-bottom: 0;
+
+  font-size: 15px;
+
+  padding: 3rem 0 2rem 0;
 
   white-space: nowrap;
 

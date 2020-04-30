@@ -1,18 +1,19 @@
 <template lang="pug">
 .full-height
   #header.header-footer
-    .logo
-      a(href="/")
-        img(
-          id="top_logo"
-          src="~/src/assets/images/logo-small.png"
-          alt="Magasin de Producteurs"
-          title="Magasin de Producteurs"
-        )
-    input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
-    #spacer
-    button#switch-btn.btn.btn-lg.btn-outline-light(type="button") 
-      span.oi.oi-grid-three-up(title='menu' aria-hidden='true')
+    .content.horiz-flex
+      .logo
+        a(href="/")
+          img(
+            id="top_logo"
+            src="~/src/assets/images/logo-small.png"
+            alt="Magasin de Producteurs"
+            title="Magasin de Producteurs"
+          )
+      input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
+      #spacer
+      button#switch-btn.btn.btn-lg.btn-outline-light(type="button") 
+        span.oi.oi-grid-three-up(title='menu' aria-hidden='true')
   router-view
   #footer.header-footer
 </template>
@@ -35,12 +36,11 @@ export default {
     new Awesomplete(input, {
       minChars: 0,
       list: shopNameList,
-      replace: function(suggestion) {
+      replace: function (suggestion) {
         this.input.value = ''
       },
     })
     input.addEventListener('awesomplete-select', (e) => {
-      console.log(">>>>>>>>> ", e.text)
       this.$router.push({ name: 'detail', params: { slug: e.text.value } })
     })
   }
@@ -67,9 +67,6 @@ export default {
 }
 
 .header-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   width: 100%;
 
   background-color: $deep-purple;
@@ -79,12 +76,6 @@ export default {
     color: white;
     text-decoration: none;
   }
-}
-
-#header {
-}
-
-#footer {
 }
 
 #spacer {

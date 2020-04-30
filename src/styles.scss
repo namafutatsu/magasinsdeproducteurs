@@ -40,22 +40,31 @@ html, body {
     margin: 0 0.5rem;
 }}
 
+.full-height {
+  height: calc(100% - 26px);
+}
 
 .content {
-    position: relative;
-    margin: 0 auto;
+  position: relative;
+  margin: 0 auto;
+}
+
+.horiz-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.awesomplete {
+  width: 100%;
 }
 
 @media (max-width: 1024px) {
   .content { width: 100%; }
 }
 
-@media (min-width: 1024px) {
+@media screen and (min-width: 1024px) {
   .content { width: 980px; }
-}
-
-.full-height {
-  height: 100%;
 }
 
 ::placeholder {

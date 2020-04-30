@@ -1,3 +1,5 @@
+/* global google */
+
 export function basicXhr (url, method = 'GET', data = null, headers = {}) {
   const defaultHeaders = {
     'Content-Type': 'application/json',
@@ -26,10 +28,23 @@ export function basicXhr (url, method = 'GET', data = null, headers = {}) {
   })
 }
 
+export function getPositionIcon () {
+  return {
+    path: google.maps.SymbolPath.CIRCLE,
+    scale: 6,
+    fillOpacity: 0.9,
+    strokeOpacity: 0.8,
+    strokeColor: 'red',
+    fillColor: 'red',
+    strokeWeight: 1,
+    labelOrigin: new google.maps.Point(0, -3),
+  }
+}
+
 export function getMapIcon () {
   return {
     path: google.maps.SymbolPath.CIRCLE,
-    scale: 4,
+    scale: 6,
     fillOpacity: 0.8,
     strokeOpacity: 0.7,
     strokeColor: '#801E6E',
