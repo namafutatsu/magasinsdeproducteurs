@@ -1,20 +1,21 @@
 <template lang="pug">
-#main.content
-  div(v-if="shop")
-    .shop-header
-      h2 {{ shop.name }}
-      img.shop(:src="shop.picture")
-    p.description {{ shop.description }}
-    #map(ref="googleMap")
-    p
-      b {{ shop.full_address }}
-    p(v-if="shop.phone")
-      span Téléphone:&nbsp;
-      a(:href='phoneLink') {{ shop.phone }}
-    p(v-if="shop.email")
-      span E-Mail:&nbsp;
-      a(:href='mailLink') {{ shop.email }}
-  div(v-else) Chargement...
+.content.full-height.vert-flex
+  #shop-detail.flex-grow.full-height
+    div(v-if="shop")
+      .shop-header
+        h2 {{ shop.name }}
+        img.shop(:src="shop.picture")
+      p.description {{ shop.description }}
+      #map(ref="googleMap")
+      p
+        b {{ shop.full_address }}
+      p(v-if="shop.phone")
+        span Téléphone:&nbsp;
+        a(:href='phoneLink') {{ shop.phone }}
+      p(v-if="shop.email")
+        span E-Mail:&nbsp;
+        a(:href='mailLink') {{ shop.email }}
+    div(v-else) Chargement...
   #oil-banner
     img(src="~/src/assets/images/huiles.png")
     .oil-text
@@ -78,51 +79,56 @@ export default {
 <style scoped lang="scss">
 @import "src/variables";
 
-#main {
+.shop-header {
+  font-family: 'olivier';
+  text-align: center;
+}
+
+.description {
+  white-space: pre-line;
+  text-justify: inter-word;
+}
+
+img.shop {
+  max-height: 200px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+}
+
+#map {
+  height: 120px;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+#shop-detail {
+  margin-top: 2rem;
+  padding: 2rem;
+  padding-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#oil-banner {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  height: 140px;
+  background-color: #f8f2e8;
   padding: 1rem;
 
-  .shop-header {
-    font-family: 'olivier';
-    text-align: center;
+  img {
+    height: 100%;
   }
 
-  .description {
-    white-space: pre-line;
-    text-justify: inter-word;
-  }
-
-  img.shop {
-    max-height: 200px;
-    margin-bottom: 1rem;
-    border-radius: 50%;
-  }
-
-  #map {
-    height: 120px;
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  #oil-banner {
-    position: fixed;
-    bottom: 0;
-    display: flex;
-    align-items: center;
-    height: 140px;
-    background-color: #f8f2e8;
+  .oil-text {
     padding: 1rem;
+  }
 
-    img {
-      height: 100%;
-    }
-
-    .oil-text {
-      padding: 1rem;
-    }
-
-    span.title {
-      font-family: 'olivier';
-    }
+  span.title {
+    font-family: 'olivier';
   }
 }
 

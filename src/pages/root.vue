@@ -1,5 +1,5 @@
 <template lang="pug">
-.full-height
+.full-height.vert-flex
   #header.header-footer
     .content.horiz-flex
       .logo
@@ -16,6 +16,7 @@
         span.oi.oi-grid-three-up(title='menu' aria-hidden='true')
   router-view
   #footer.header-footer
+    span Création Jeanne Vaguelsy, Victor Perron
 </template>
 
 <script>
@@ -68,6 +69,9 @@ export default {
 
 .header-footer {
   width: 100%;
+
+  color: #ddd;
+  text-align: center;
 
   background-color: $deep-purple;
   margin-bottom: 0px;

@@ -1,16 +1,17 @@
 <template lang="pug">
-.full-height
+#map-container.content.full-height
   #map(ref="googleMap")
-  router-link#current-shop(
-    v-if="shop"
-    :to="{ name: 'detail', params: { slug: shop.slug }}"
-  )
-    .content.horiz-flex
-      div
-        h3 {{ shop.name }}
-        p
-          b {{ shop.full_address }}
-      .arrow-right
+  transition(name='slide-fade' mode='out-in')
+    router-link#current-shop(
+      v-if="shop"
+      :key='shop',
+      :to="{ name: 'detail', params: { slug: shop.slug }}"
+    )
+      .horiz-flex
+        div
+          h3 {{ shop.name }}
+          p
+            b {{ shop.full_address }}
 </template>
 
 <script>
@@ -36,6 +37,9 @@ export default {
       GoogleLoad,
       MdpApi.getShops(),
     ])
+
+    // Flexbox and Google maps don't mix well
+    this.$refs.googleMap.style.height = document.getElementById('map-container').clientHeight + 'px'
 
     const map = new google.maps.Map(this.$refs.googleMap, {
       center: {
@@ -100,6 +104,20 @@ export default {
   height: 100%;
 }
 
+#map-container {
+  position: relative;
+}
+
+.slide-fade-enter-active {
+  transition: all .3s ease;
+}
+.slide-fade-leave-active {
+  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+}
+.slide-fade-enter, .slide-fade-leave-to {
+  opacity: 0;
+}
+
 #current-shop {
   display: flex;
   justify-content: space-between;
@@ -108,32 +126,22 @@ export default {
   cursor: pointer;
 
   width: 100%;
-  position: fixed;
+  position: absolute;
   bottom: 0px;
   background-color: white;
   border-top: solid 1px #aaa;
 
-  font-size: 15px;
+  font-size: 12px;
 
-  padding: 3rem 0 2rem 0;
+  padding: 2rem;
+  padding-bottom: 1rem;
 
   white-space: nowrap;
 
-  .arrow-right {
-    right: 0px;
-    margin-top: -1rem;
-    top: 0px;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 20px 0 20px 10px;
-    border-color: transparent transparent transparent #587ea8;
-  }
+  color: #666 !important;
 
   h3 {
     font-family: 'olivier';
   }
-
-  color: #666 !important;
 }
 </style>

@@ -19,10 +19,6 @@ html, body {
   color: $dark-grey;
 }
 
-#main-app {
-  height: 100%;
-}
-
 /* Dead Simple Grid by Vladimir Agafonkin */
 .row .row { margin:  0 -1.5em; }
 .col      { padding: 0  1.5em; }
@@ -41,12 +37,23 @@ html, body {
 }}
 
 .full-height {
-  height: calc(100% - 26px);
+  min-height: 100%;
 }
 
 .content {
-  position: relative;
-  margin: 0 auto;
+  height: 100%;
+  flex-grow: 1;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.vert-flex {
+  flex-direction: column;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .horiz-flex {
