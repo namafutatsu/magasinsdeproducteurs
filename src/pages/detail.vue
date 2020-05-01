@@ -6,9 +6,11 @@
         h2 {{ shop.name }}
         img.shop(:src="shop.picture")
       p.description {{ shop.description }}
-      #map(ref="googleMap")
       p
-        b {{ shop.full_address }}
+        b
+          a(:href='mapsLink' target='_blank')
+            img.external-link(src="~/src/assets/images/external-link.png")
+            span {{ shop.full_address }}
       p(v-if="shop.phone")
         span Téléphone:&nbsp;
         a(:href='phoneLink') {{ shop.phone }}
@@ -27,9 +29,7 @@
 </template>
 
 <script>
-/* global google, MdpApi, GoogleLoad */
-
-import { getMapIcon } from 'src/services/utils'
+/* global MdpApi */
 
 export default {
   data: function () {
@@ -38,6 +38,9 @@ export default {
     }
   },
   computed: {
+    mapsLink () {
+      return `http://maps.google.com/maps?q=${this.shop.coords.lat},${this.shop.coords.lng}`
+    },
     phoneLink () {
       return `tel:${this.shop.phone}`
     },
@@ -48,22 +51,7 @@ export default {
   methods: {
     async onLoad (slug) {
       this.shop = await MdpApi.getShop(slug)
-      await GoogleLoad
-      const map = new google.maps.Map(this.$refs.googleMap, {
-        center: this.shop.coords,
-        zoom: 10,
-        disableDefaultUI: true,
-      })
-      google.maps.event.addListener(map, 'click', () => {
-        this.shop = null
-      })
       // URL = http://maps.google.com/maps?q=24.197611,120.780512
-      new google.maps.Marker({ // eslint-disable-line no-new
-        position: this.shop.coords,
-        map: map,
-        title: this.shop.name,
-        icon: getMapIcon(),
-      })
     },
   },
   beforeRouteUpdate (to, from, next) {
@@ -93,6 +81,11 @@ img.shop {
   max-height: 200px;
   margin-bottom: 1rem;
   border-radius: 50%;
+}
+
+img.external-link {
+  height: 1.2rem;
+  margin-right: 0.5rem;
 }
 
 #map {
