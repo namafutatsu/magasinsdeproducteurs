@@ -21,10 +21,10 @@
   #oil-banner
     img(src="~/src/assets/images/huiles.png")
     .oil-text
-      span.title Connaissez-vous les huiles aromatiques ?
+      span.title Connaissez-vous les huiles aromatiques ?&nbsp;
       i Les huiles aromatiques Le Rouquet sont obtenues par macération de plantes fraîches dans une huile d’olive vierge extra.
       p
-        a(href="https://lerouquet.fr/") Les découvrir ici !
+        a(href="https://lerouquet.fr/", target='_blank') Les découvrir ici !
 
 </template>
 
@@ -108,7 +108,7 @@ img.external-link {
   margin-top: auto;
   display: flex;
   align-items: center;
-  height: 140px;
+  height: 160px;
   background-color: #f8f2e8;
   padding: 1rem;
 

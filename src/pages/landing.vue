@@ -1,5 +1,5 @@
 <template lang="pug">
-#map-container.content.full-height
+#map-container.flex-grow.full-height
   #map(ref="googleMap")
   transition(name='slide-fade' mode='out-in')
     router-link#current-shop(
@@ -106,6 +106,7 @@ export default {
 
 #map-container {
   position: relative;
+  width: 100%;
 }
 
 .slide-fade-enter-active {

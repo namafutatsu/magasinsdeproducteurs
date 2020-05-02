@@ -6,7 +6,7 @@
         a(href="/")
           img(
             id="top_logo"
-            src="~/src/assets/images/logo-small.png"
+            src="~/src/assets/images/logo.png"
             alt="Magasin de Producteurs"
             title="Magasin de Producteurs"
           )
@@ -71,7 +71,6 @@ export default {
   width: 100%;
 
   color: #ddd;
-  text-align: center;
 
   background-color: $deep-purple;
   margin-bottom: 0px;
@@ -82,7 +81,20 @@ export default {
   }
 }
 
+.logo img {
+  height: 4rem;
+}
+
 #spacer {
   width: 12px;
 }
+
+#header {
+  padding: 0.8rem 0;
+}
+
+#footer {
+  text-align: center;
+}
+
 </style>
