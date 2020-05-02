@@ -12,8 +12,6 @@
           )
       input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
       #spacer
-      button#switch-btn.btn.btn-lg.btn-outline-light(type="button") 
-        span.oi.oi-grid-three-up(title='menu' aria-hidden='true')
   router-view
   #footer.header-footer
     .horiz-flex
@@ -98,7 +96,7 @@ export default {
 }
 
 #spacer {
-  width: 12px;
+  width: 24px;
 }
 
 #header {
@@ -120,6 +118,16 @@ export default {
   img {
     height: 2rem;
     border-radius: 3px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #footer {
+    .horiz-flex {
+      margin: 0 auto;
+      margin-bottom: 0.5rem;
+      width: 400px;
+    }
   }
 }
 
