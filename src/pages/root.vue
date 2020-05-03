@@ -17,16 +17,19 @@
   #footer.header-footer
     .horiz-flex
       router-link(to="/qui-sommes-nous") Qui sommes-nous ?
+      a(href='mailto:contact@magasins-de-producteurs.com')
+        img#email-image(src="~/src/assets/images/email.png")
+        span Contact
       router-link(to="/mentions-legales") Mentions légales
     .horiz-flex
       a(href='https://www.facebook.com/magasindeproducteurs', target='_blank')
-        img(src="~/src/assets/images/facebook.png")
+        img.link-img(src="~/src/assets/images/facebook.png")
       a(href='http://www.bienvenue-a-la-ferme.com/', target='_blank')
-        img(src="~/src/assets/images/baf_small.png")
+        img.link-img(src="~/src/assets/images/baf_small.png")
       a(href='https://www.boutiquespaysannes.fr/', target='_blank')
-        img(src="~/src/assets/images/bpaysannes_small.png")
+        img.link-img(src="~/src/assets/images/bpaysannes_small.png")
       a(href='http://www.terredenvies.fr/', target='_blank')
-        img(src="~/src/assets/images/terredenvies_small.png")
+        img.link-img(src="~/src/assets/images/terredenvies_small.png")
 </template>
 
 <script>
@@ -113,10 +116,10 @@ export default {
 
   .horiz-flex {
     justify-content: space-around;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
   }
 
-  img {
+  .link-img {
     height: 2rem;
     border-radius: 3px;
   }
@@ -126,10 +129,14 @@ export default {
   #footer {
     .horiz-flex {
       margin: 0 auto;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.8rem;
       width: 400px;
     }
   }
 }
 
+#email-image {
+  height: 1.2rem;
+  margin-right: 0.3rem;
+}
 </style>
