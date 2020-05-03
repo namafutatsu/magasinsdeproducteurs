@@ -106,6 +106,8 @@ img.external-link {
 
 #oil-banner {
   margin-top: auto;
+  margin-bottom: 10px;
+  box-shadow: 0px 0px 6px #aaa;
   display: flex;
   align-items: center;
   height: 160px;

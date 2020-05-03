@@ -12,13 +12,16 @@
           )
       input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
       #spacer
+      router-link#login(to="/login")
+        .oi.oi-account-login
+
   transition(name='slide-fade' mode='out-in')
     router-view
   #footer.header-footer
     .horiz-flex
       router-link(to="/qui-sommes-nous") Qui sommes-nous ?
       a(href='mailto:contact@magasins-de-producteurs.com')
-        img#email-image(src="~/src/assets/images/email.png")
+        span.oi.oi-envelope-closed &nbsp;
         span Contact
       router-link(to="/mentions-legales") Mentions légales
     .horiz-flex
@@ -125,6 +128,11 @@ export default {
   }
 }
 
+#login {
+  font-size: 1.5rem;
+  margin: 0 0.8rem;
+}
+
 @media screen and (min-width: 1024px) {
   #footer {
     .horiz-flex {
@@ -133,10 +141,5 @@ export default {
       width: 400px;
     }
   }
-}
-
-#email-image {
-  height: 1.2rem;
-  margin-right: 0.3rem;
 }
 </style>
