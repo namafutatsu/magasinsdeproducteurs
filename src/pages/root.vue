@@ -12,7 +12,8 @@
           )
       input#search.form-control.form-control-lg(type="text", placeholder="Chercher un magasin")
       #spacer
-  router-view
+  transition(name='slide-fade' mode='out-in')
+    router-view
   #footer.header-footer
     .horiz-flex
       router-link(to="/qui-sommes-nous") Qui sommes-nous ?

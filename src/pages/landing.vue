@@ -1,5 +1,9 @@
 <template lang="pug">
 #map-container.flex-grow.full-height
+  #message
+    p Nous éprouvons un réel plaisir à manger et boire des aliments qui ont du goût, une histoire...
+    p Et ce plaisir est encore plus grand lorsque ces produits nous sont vendus par ceux qui les ont faits.
+    .emphasis C'est pourquoi ON AIME les magasins de producteurs.
   #map(ref="googleMap")
   transition(name='slide-fade' mode='out-in')
     router-link#current-shop(
@@ -8,7 +12,7 @@
       :to="{ name: 'detail', params: { slug: shop.slug }}"
     )
       .horiz-flex
-        div
+        .content
           h3 {{ shop.name }}
           p
             b {{ shop.full_address }}
@@ -43,7 +47,7 @@ export default {
 
     const map = new google.maps.Map(this.$refs.googleMap, {
       center: {
-        lat: 46.2,
+        lat: 46.9,
         lng: 2.7,
       },
       zoom: 6,
@@ -109,16 +113,6 @@ export default {
   width: 100%;
 }
 
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to {
-  opacity: 0;
-}
-
 #current-shop {
   display: flex;
   justify-content: space-between;
@@ -143,6 +137,42 @@ export default {
 
   h3 {
     font-family: 'olivier';
+  }
+}
+
+#message {
+  text-align: center;
+  position: absolute;
+  z-index: 10000;
+  left: 50%;
+  top: 10px;
+  padding: 0.4rem;
+  color: $purple;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 0 5px #888;
+
+  .emphasis {
+    font-family: olivier;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  #message {
+    width: 96%;
+    margin-left: -48%;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #message {
+    width: 800px;
+    margin-left: -400px;
+  }
+
+  #current-shop {
+    justify-content: space-around;
   }
 }
 </style>
