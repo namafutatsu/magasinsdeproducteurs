@@ -8,14 +8,6 @@ export function getStoredToken () {
   return localStorage.getItem('token')
 }
 
-export function saveCurrency (currency) {
-  localStorage.setItem('currency', currency)
-}
-
-export function getCurrency () {
-  return localStorage.getItem('currency')
-}
-
 export function setRemember () {
   localStorage.setItem('remember', 1)
 }

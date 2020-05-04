@@ -46,7 +46,7 @@ export const client = {
     )
   },
   getToken: async function (username, password, rememberMe) {
-    const data = await basicXhr(urljoin(baseUrl, 'token/'), 'POST', JSON.stringify({
+    const data = await basicXhr(urljoin(baseUrl, 'account/token/'), 'POST', JSON.stringify({
       'username': username,
       'password': password,
     }))

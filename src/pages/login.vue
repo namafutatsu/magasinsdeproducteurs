@@ -27,12 +27,12 @@
           @keyup.enter="submit",
           @keyup.esc="closeLoginForm",
         )
-      .form-check
-         input.form-check-input(type="checkbox")
+      .form-check.checkbox-zone(@click='updateRememberMe')
+         input.form-check-input.checkbox(type="checkbox")
          label.form-check-label Se souvenir de moi
-      .row(v-if="invalidLogin")
+      .form-group.error(v-if="invalidLogin")
         b.active Nom d'utilisateur ou mot de passe erroné.
-      .row(v-if="unexpectedError")
+      .form-group.error(v-if="unexpectedError")
         b.active Une erreur s'est produite dans l'accès à nos serveurs. Veuillez contacter le support technique.
       button.btn.btn-primary(type="submit" @click="submit") Se connecter
 </template>
@@ -117,6 +117,11 @@ export default {
 .title {
   font-family: olivier;
   font-size: 2rem;
+}
+
+.error {
+  color: red;
+  margin-top: 1rem;
 }
 
 @media screen and (min-width: 1024px) {
