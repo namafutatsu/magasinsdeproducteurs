@@ -1,9 +1,11 @@
 <template lang="pug">
 #map-container.flex-grow.full-height
-  #message
-    p Nous éprouvons un réel plaisir à manger et boire des aliments qui ont du goût, une histoire...
-    p Et ce plaisir est encore plus grand lorsque ces produits nous sont vendus par ceux qui les ont faits.
-    .emphasis C'est pourquoi ON AIME les magasins de producteurs.
+  transition(name='slide-fade' mode='out-in')
+    #message(v-if='displayTopMessage')
+      i.oi.oi-x(@click='displayTopMessage = false')
+      p Nous éprouvons un réel plaisir à manger et boire des aliments qui ont du goût, une histoire...
+      p Et ce plaisir est encore plus grand lorsque ces produits nous sont vendus par ceux qui les ont faits.
+      .emphasis C'est pourquoi ON AIME les magasins de producteurs.
   #map(ref="googleMap")
   transition(name='slide-fade' mode='out-in')
     router-link#current-shop(
@@ -31,6 +33,7 @@ function getCurrentPosition (options = {}) {
 export default {
   data: function () {
     return {
+      displayTopMessage: true,
       shops: [],
       shop: null,
     }
@@ -143,7 +146,7 @@ export default {
 #message {
   text-align: center;
   position: absolute;
-  z-index: 10000;
+  z-index: 1000;
   left: 50%;
   top: 10px;
   padding: 0.4rem;
@@ -155,6 +158,13 @@ export default {
   .emphasis {
     font-family: olivier;
     font-size: 1.2rem;
+  }
+
+  .oi {
+    position: absolute;
+    right: 0.5rem;
+    top: 0.5rem;
+    cursor: pointer;
   }
 }
 

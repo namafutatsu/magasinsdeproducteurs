@@ -40,12 +40,7 @@
 <script>
 /* global grecaptcha, MdpApi, RecaptchaLoad */
 
-import CheckBox from 'src/check-box.vue'
-
 export default {
-  components: {
-    'check-box': CheckBox,
-  },
   data: function () {
     return {
       rememberMe: true,
